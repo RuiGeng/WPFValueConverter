@@ -11,10 +11,17 @@
         <TextBox x:Name="inputTextBox1" Margin="10" BorderBrush="Azure" BorderThickness="2"></TextBox>
         <TextBox x:Name="inputTextBox2" Margin="10" BorderBrush="Azure" BorderThickness="2"></TextBox>
         <Border Margin="10" Background="BlanchedAlmond">
-            <TextBlock Margin="10" Text="{Binding ElementName=inputTextBox1, Path=Text}" />
+            <TextBlock Margin="10" Text="{Binding ElementName=inputTextBox1, Path=Text, Converter={x:Static local:MainWindow.inputConverter}}" />
         </Border>
         <Border Margin="10" Background="AliceBlue">
-            <TextBlock Margin="10" Text="{Binding ElementName=inputTextBox2, Path=Text}" />
+            <TextBlock Margin="10">
+                <TextBlock.Text>
+                    <MultiBinding Converter="{x:Static local:MainWindow.StringStringConverter}">
+                        <Binding ElementName="inputTextBox1" Path="Text" />
+                        <Binding ElementName="inputTextBox2" Path="Text" />
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
         </Border>
     </StackPanel>
 </Window>
